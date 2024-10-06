@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Personal academic webpage">
-    <title>Your Name - Academic Homepage</title>
+    <meta name="description" content="Yuxin Zhao's Academic Homepage">
+    <title>Yuxin Zhao - Academic Homepage</title>
     <style>
         body {
             font-family: 'Lato', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5; /* Soft, light background */
-            color: #4f4f4f; /* Soft gray for readability */
+            display: flex;
+            height: 100vh;
+            background-color: #f5f5f5;
+            color: #4f4f4f;
             transition: background-color 1s ease-in-out, color 1s ease-in-out;
             opacity: 0;
             animation: pageFadeIn 1.5s ease-in-out forwards;
+            overflow: hidden;
         }
 
         @keyframes pageFadeIn {
@@ -22,42 +25,97 @@
             to { opacity: 1; }
         }
 
-        header {
-            background-color: #d2e4c4; /* Soft green inspired by nature */
-            color: #4f4f4f;
+        /* Sidebar styling */
+        .sidebar {
+            background-color: #d2e4c4;
+            width: 30%; /* Enlarged width for better visual proportion */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 40px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
             text-align: center;
-            border-bottom: 3px solid #b0c5a1;
+        }
+
+        .sidebar img {
+            border-radius: 50%;
+            width: 200px; /* Increased image size */
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .sidebar h1 {
+            margin-top: 20px;
+            font-size: 28px; /* Enlarged font for name */
+            color: #4f4f4f;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+        }
+
+        .sidebar p {
+            color: #4f4f4f;
+            font-size: 18px;
+            font-weight: bold;
         }
 
         nav {
-            margin: 20px;
-            text-align: center;
+            margin-top: 40px;
+            width: 100%;
         }
 
         nav a {
-            margin: 0 15px;
+            display: block;
+            padding: 12px 0;
+            font-size: 18px; /* Increased font size */
+            font-family: 'Arial', sans-serif;
             text-decoration: none;
             color: #4f4f4f;
-            font-weight: bold;
             transition: color 0.5s ease-in-out;
         }
 
         nav a:hover {
-            color: #8fb08b; /* Soft warm green on hover */
+            color: #8fb08b;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
+        /* Main content styling */
+        .content-container {
+            flex: 1;
+            height: 100vh;
+            overflow-y: hidden;
+            position: relative;
+        }
+
+        .content {
+            width: calc(100% - 30px); /* Adjust for larger sidebar */
+            max-width: 1000px;
+            margin: 20px auto;
             padding: 40px;
-            background-color: rgba(255, 255, 255, 0.95); /* Light, transparent white for dreamlike effect */
+            background-color: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Gentle shadow for softness */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            display: none;
         }
 
-        h1, h2 {
-            color: #8fb08b; /* Warm green for titles */
+        .content.active {
+            display: block;
+        }
+
+        h2 {
+            color: #8fb08b;
+            border-bottom: 2px solid #bdc3c7;
+            padding-bottom: 10px;
+            font-family: 'Georgia', serif;
+        }
+
+        h3 {
+            font-size: 20px;
+            font-family: 'Arial', sans-serif;
+            color: #34495e;
+        }
+
+        p, ul {
+            font-size: 18px;
+            line-height: 1.6;
         }
 
         ul {
@@ -69,42 +127,50 @@
             margin-bottom: 10px;
         }
 
+        strong {
+            font-weight: bold;
+        }
+
         footer {
             background-color: #d2e4c4;
             color: #4f4f4f;
             text-align: center;
-            padding: 20px;
+            padding: 5px;
             border-top: 3px solid #b0c5a1;
             position: fixed;
             bottom: 0;
             width: 100%;
+            font-size: 10px;
         }
 
-        .hidden {
-            display: none;
+        /* Film Notes table with scrolling */
+        .film-notes-container {
+            max-height: 400px;
+            overflow-y: scroll;
+            margin-top: 20px;
+            padding-right: 20px;
         }
 
-        /* Content fade-in animation for section transitions */
-        .content-section {
-            opacity: 0;
-            transform: translateY(20px); /* Start with a slight slide */
-            transition: opacity 0.8s ease, transform 0.8s ease;
+        .film-notes-table {
+            width: 100%;
+            border-collapse: collapse;
         }
 
-        .active {
-            opacity: 1;
-            transform: translateY(0); /* Move into view smoothly */
+        .film-notes-table td {
+            padding: 15px;
+            vertical-align: top;
+            border-bottom: 2px solid #bdc3c7;
         }
 
-        /* Subtle animations for a natural flow */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .film-notes-table td img {
+            width: 120px;
+            border-radius: 10px;
         }
 
-        @keyframes slowMove {
-            from { transform: translateY(-10px); }
-            to { transform: translateY(10px); }
+        .film-notes-table td p {
+            color: #2c3e50;
+            font-family: 'Arial', sans-serif;
+            font-size: 16px;
         }
 
         /* Dreamlike background animation */
@@ -115,7 +181,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://example.com/forest-bg.jpg'); /* Replace with natural background image */
+            background-image: url('https://github.com/zyx040301/zyx040301.github.io/blob/main/Dwelling%20by%20the%20West%20Lake.jpg?raw=true');
             background-size: cover;
             background-position: center;
             filter: blur(8px);
@@ -124,71 +190,147 @@
             animation: slowMove 8s ease-in-out infinite alternate;
         }
 
+        @keyframes slowMove {
+            from { transform: translateY(-10px); }
+            to { transform: translateY(10px); }
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Your Name - Academic Homepage</h1>
-    <p>Welcome to my personal academic webpage, reflecting on research and nature.</p>
-</header>
-
-<nav>
-    <a href="#" onclick="showSection('about')">About Me</a>
-    <a href="#" onclick="showSection('publications')">Publications</a>
-    <a href="#" onclick="showSection('hobbies')">Hobbies</a>
-    <a href="#" onclick="showSection('contact')">Contact</a>
-</nav>
-
-<div class="container">
-    <div id="about" class="content-section active">
-        <h2>About Me</h2>
-        <p>I am a researcher in [Your Field], currently working at [Your Institution]. My research interests include [Your Research Areas]. I hold a [Your Degree] from [Your University].</p>
+    <!-- Sidebar Section -->
+    <div class="sidebar">
+        <img src="https://github.com/zyx040301/zyx040301.github.io/blob/main/yuxinxzhao.jpeg?raw=true" alt="Yuxin Zhao">
+        <h1>Yuxin Zhao</h1>
+        <p>Qian Class Student at NUDT</p>
+        <nav>
+            <a href="#" onclick="showSection('about')">About Me</a>
+            <a href="#" onclick="showSection('news')">News</a>
+            <a href="#" onclick="showSection('publications')">Publications</a>
+            <a href="#" onclick="showSection('hobbies')">Hobbies</a>
+            <a href="#" onclick="showSection('contact')">Contact</a>
+        </nav>
     </div>
 
-    <div id="publications" class="content-section hidden">
-        <h2>Publications</h2>
-        <ul>
-            <li><a href="#">Title of Paper 1</a> - Published in [Journal/Conference], [Year]</li>
-            <li><a href="#">Title of Paper 2</a> - Published in [Journal/Conference], [Year]</li>
-            <li><a href="#">Title of Paper 3</a> - Published in [Journal/Conference], [Year]</li>
-        </ul>
+    <!-- Main Content Container -->
+    <div class="content-container">
+        <div class="content active" id="about">
+            <h2>About Me</h2>
+            <p><strong>I am currently an undergraduate student</strong> at the National University of Defense Technology (NUDT), majoring in Information Engineering in the Qian Class. I graduated from the High School Affiliated to Nanjing Normal University. My academic interests lie in the fields of <strong>machine learning, remote sensing image processing,</strong> and <strong>multimodal AIGC</strong>.</p>
+            <p>My research focuses on cutting-edge technologies such as diffusion models and their applications in image translation. Recently, I published a paper titled <strong>Optical Infrared Image Translation Based on Diffusion Models</strong>, which was accepted at the first Conference on Space Information Technology and Industry Development and recommended for publication in the SPIE proceedings (EI-indexed).</p>
+            <p>Beyond research, I actively participate in national and international academic competitions and projects, further honing my problem-solving skills and ability to innovate in complex fields.</p>
+        </div>
+
+        <div class="content" id="news">
+            <h2>News</h2>
+            <ul>
+                <li>[2024] My paper <em>Optical Infrared Image Translation Based on Diffusion Models</em> was accepted at the Space Information Technology and Industry Development Conference.</li>
+                <li>[2024] I led a National Innovation Project on intelligent radar identification using spiking neural networks.</li>
+                <li>[2023] Achieved Second Prize in the National Undergraduate Electronic Design Contest.</li>
+            </ul>
+        </div>
+
+        <div class="content" id="publications">
+            <h2>Publications</h2>
+            <ul>
+                <li><strong>Optical Infrared Image Translation Based on Diffusion Models</strong> - Presented at the Space Information Technology and Industry Development Conference (2024).</li>
+                <li><strong>Intelligent Radar Identification with Spiking Neural Networks</strong> - Under review for future publication.</li>
+            </ul>
+        </div>
+
+        <div class="content" id="hobbies">
+            <h2>Hobbies</h2>
+            <p>In addition to research, I have a deep passion for sports and the arts. I enjoy swimming, roller skating, and playing golf. I am also proficient in various musical instruments, including the piano and the ocarina. I love watching films and have a growing interest in film theory and analysis.</p>
+
+            <h3>Film Notes:</h3>
+            <div class="film-notes-container">
+                <table class="film-notes-table">
+                    <tr>
+                        <td><img src="https://github.com/zyx040301/zyx040301.github.io/blob/main/film_notes/%E4%B8%80%E4%BB%A3%E5%AE%97%E5%B8%88.jpg?raw=true" alt="一代宗师海报"></td>
+                        <td>
+                            <p><strong>一代宗师</strong></p>
+			    <p>
+    电影《一代宗师》不仅是一部展现武术传承的功夫片，更是一部深刻探索文化自觉和身体语言的电影。在数字时代已然到来的背景下，导演王家卫选择了胶片拍摄，以传统的媒介方式唤起对过去的追忆和敬畏。这种胶片的质感，在电影中充满了对传统美学的礼赞，同时隐隐表达出数码转型所带来的文化和技术转变。导演通过影像语言的精妙构成，展现了对胶片电影消逝的自觉，传递出一种文化断裂与现代焦虑感。
+</p>
+
+			    <p>
+    然而，真正打动观众的，不仅是电影的媒介选择，更在于其深刻的文化自觉。王家卫在拍摄这部电影时，经过长达八九年的准备，其中要求演员花费三年时间习武。这个习武的过程不仅是为了角色的塑造，更是一种身体语言的改造。演员的身体在银幕上所表现出的打斗姿态、举手投足，皆在传递一种深刻的传统文化内涵。尤其是宫二这一女性复仇者形象，她的每一个动作都渗透着传统文化的坚韧与深沉，仿佛在述说着她那无法逃脱的命运。她的复仇之路，既是个人的悲剧，也是一种文化命运的隐喻。
+</p>
+
+			   <p>
+    影片中大量的脚步特写和打斗场景通过身体语言的表演，传递了中国传统文化的“后脚跟性”，即身体的重心稳固、下沉。台湾学者张小虹曾提到，前现代与现代的身体语言可以通过重心的变化来区分：现代人重心前倾，依赖前脚掌，而传统文化则重心后移，立足于后脚跟。《一代宗师》通过武术动作的展现，细腻地表达了这一“后脚跟性”的文化内涵。武术的力量不仅在于表面的打斗，更在于内心的沉稳、重心的扎根，这是中国传统文化的根本所在。
+</p>
+
+			   <p>
+    因此，《一代宗师》不仅仅是一部关于功夫的电影，更是一部通过身体和武术语言探索中国传统文化的当代寓言。影片中所展现的武林，不仅是个人技艺的角斗场，更是文化传承与现代变迁的缩影。王家卫通过对身体语言的精心构造，借助影像语言，将传统文化的厚重与沉稳融入到每一帧画面中。这不仅是对胶片电影的挽歌，更是对文化身份和自我追寻的深刻反思。
+</p>
+
+			   <p>
+    电影中，宫二的复仇与孤独，正如王家卫对现代文化断裂的追问一样，都是一种关于自我、传统与现代的深刻思考。在这部电影中，我们看到了中国传统文化在现代社会中如何艰难寻求立足之地的过程，这不仅是一个人、一代人的故事，更是一种文化命运的沉浮。
+</p>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://github.com/zyx040301/zyx040301.github.io/blob/main/film_notes/%E6%83%85%E4%B9%A6.jpg?raw=true" alt="情书海报"></td>
+                        <td>
+                            <p><strong>情书</strong></p>
+                            <p>在精神分析的视角下，这部影片揭示了拉康镜像阶段的内涵。博子通过与藤井树（女）的通信，仿佛看到了自己情感中的“镜像”，无法区分真实的自我与幻想中的自我。她的爱不仅仅是对藤井树（男）的怀念，更是对自己理想化的爱的执迷。正如影片中的冰封蜻蜓，爱情在看似温暖的回忆中，实则脆弱如影。</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://github.com/zyx040301/zyx040301.github.io/blob/main/film_notes/%E4%B8%80%E4%B8%80.jpg?raw=true" alt="一一海报"></td>
+                        <td>
+                            <p><strong>一一</strong></p>
+			    <p>
+    杨德昌导演的《一一》是一部在日常生活中寻找哲理的电影，它以细腻的镜头语言和隐秘的结构揭示了人类关系的复杂与脆弱。在这部将近三小时的影片中，杨德昌通过极其生活化的情节描绘出一个家庭的故事，却又超越了家庭的范畴，展现了人与社会、与自我、与时间的张力。
+</p>
+
+			   <p>
+    影片通过不同角色的视角，探索了人际关系中的陌生与熟悉。婆婆的成为植物人，是连接所有人物故事的核心，就像树干支撑着枝叶，而这一事件也象征了家庭中传统权威的沉默消失。每个角色都在婆婆的沉睡中，慢慢失去了生活的方向。女主人敏敏逃入修行，NJ与初恋的重逢又最终无果，孩子们在混乱的家庭中经历各自的成长与迷茫。人与人之间的交流几乎陷入沉默，只有通过婆婆的床边独白，这个家庭的隐秘矛盾才得以一丝显露。
+</p>
+
+			    <p>
+    影片看似无情绪波动，却在每个细节中积蓄了情感的力量，犹如一幅精致的中国水墨画，淡而不失深意。杨德昌用近乎沉默的方式揭示了现代生活中的孤独与无力感。婚姻中的貌合神离，亲子关系中的疏离，以及对往昔的徒劳追忆，无不传达出一种对生命无常的深刻理解。
+</p>
+
+			    <p>
+    《一一》所表现的，不仅是家庭的琐碎，更是个人与世界对抗的隐痛。电影以孩子洋洋的一封信作为终结，点出了影片的哲学核心——我们总能看到生活的一半，却永远无法窥见另一半的真相。成长是一场孤独的旅程，人生是一个无法复原的谜。
+</p>
+
+                        </td>
+                    </tr>
+                    <!-- Add more films in similar structure -->
+                </table>
+            </div>
+        </div>
+
+        <div class="content" id="contact">
+            <h2>Contact</h2>
+            <p>Email: <strong>yuxin_zhao04@163.com</strong></p>
+            <form>
+                <input type="text" name="name" placeholder="Your Name" required><br><br>
+                <input type="email" name="email" placeholder="Your Email" required><br><br>
+                <textarea name="message" rows="5" placeholder="Your Message" required></textarea><br><br>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
     </div>
 
-    <div id="hobbies" class="content-section hidden">
-        <h2>Hobbies</h2>
-        <p>When I'm not working on research, I enjoy [Your Hobbies]. These activities help me stay creative and balanced.</p>
-    </div>
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Yuxin Zhao. All Rights Reserved.</p>
+    </footer>
 
-    <div id="contact" class="content-section hidden">
-        <h2>Contact Me</h2>
-        <form>
-            <input type="text" name="name" placeholder="Your Name" required><br><br>
-            <input type="email" name="email" placeholder="Your Email" required><br><br>
-            <textarea name="message" rows="5" placeholder="Your Message" required></textarea><br><br>
-            <button type="submit">Send Message</button>
-        </form>
-    </div>
-</div>
-
-<footer>
-    <p>Connect with me on <a href="#">LinkedIn</a> | <a href="#">Twitter</a> | <a href="#">GitHub</a></p>
-</footer>
-
-<script>
-    // Function to show only the clicked section
-    function showSection(section) {
-        // Hide all sections
-        document.querySelectorAll('.content-section').forEach(function(div) {
-            div.classList.add('hidden');
-            div.classList.remove('active');
-        });
-
-        // Show the selected section with animation
-        document.getElementById(section).classList.remove('hidden');
-        document.getElementById(section).classList.add('active');
-    }
-</script>
+    <script>
+        // Function to show only the clicked section without scrolling
+        function showSection(sectionId) {
+            document.querySelectorAll('.content').forEach(function(section) {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+    </script>
 
 </body>
 </html>
